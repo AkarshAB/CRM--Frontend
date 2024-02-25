@@ -1,0 +1,56 @@
+.profileImg {
+  overflow: hidden;
+  border-radius: 50%;
+  /* border: 1px solid black; */
+  height: 150px;
+  width: 150px;
+}
+
+.dp {
+  height: 200px;
+  width: 200px;
+}
+
+.homeLeft {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+.shopsSection {
+  text-decoration: underline;
+}
+
+.homeRight {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* border: 1px solid; */
+}
