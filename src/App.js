@@ -7,20 +7,29 @@ import Footer from './components/common/footer/Footer.jsx';
 import Home from './components/pages/home/Home.jsx';
 import ShopProfile from './components/ShopPage/ShopProfile.jsx';
 import ShopAdding from './components/ShopAdding/ShopAdding.jsx';
+import Inventory from './components/Inventory/Inventory.jsx';
+import Billing from './components/Billing/Billing.jsx';
+import Stocks from './components/Stocks/Stocks.jsx';
+import BackButton from './components/common/Back Button/BackButton.jsx';
 
 
 function App() {
   return (
     <div className="App">
       <Header />
+      <BackButton />
       <Routes>
         <Route path='/' element={<Login />}></Route>
         <Route path='/register' element={<Register />}></Route>
         <Route path='/home' element={<Home />}></Route>
         <Route path='/shopDetails' element={<ShopProfile />}></Route>
         <Route path='/addShop' element={<ShopAdding />}></Route>
+        <Route path='/inventory' element={<Inventory />}></Route>
+        <Route path='/billing' element={<Billing />}></Route>
+        <Route path='/stocks' element={<Stocks />}></Route>
       </Routes>
-      <div className=''><Footer /></div>
+      <Footer />
+      <div className=''></div>
     </div>
   );
 }

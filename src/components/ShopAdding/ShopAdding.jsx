@@ -62,7 +62,7 @@ function ShopAdding() {
   };
 
   return (
-    <MDBContainer fluid className="mt-5 shopAddWrapper">
+    <MDBContainer fluid className="mt-5 shopAddWrapper col-6">
       <section>
         <MDBRow className="justify-content-center">
           <MDBCol lg="8">

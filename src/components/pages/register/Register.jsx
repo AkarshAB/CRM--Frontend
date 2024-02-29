@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Register.css'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 
 function Register() {
@@ -28,16 +29,26 @@ function Register() {
         email: email,
         password: password
       });
-      alert('Registered successfully')
+      // alert('Registered successfully')
+      Swal.fire({
+        title: "Registered successfully",
+        // text: "You clicked the button!",
+        icon: "success"
+      });
       console.log(response);
 
       navigate('/')
       localStorage.setItem('username', username)
       localStorage.setItem('email', email)
     } catch (error) {
-            setError('Error registering user: ' + error.response.data.message);
-            console.error('Error registering user:', error);
-            alert('Error registering user: ' + error.response.data.message);
+      setError('Error registering user: ' + error.response.data.message);
+      console.error('Error registering user:', error);
+      // alert('Error registering user: ' + error.response.data.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
     }
   };
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import './ShopProfile.css'
-import img from '../../assets/wp6733581.jpg'
 import { Link } from 'react-router-dom'
 
 
@@ -12,9 +11,7 @@ function ShopProfile() {
           <div className="col-8 homeLeft">
             <h3 className='text-center my-3 text-decoration-underline'>Shop Profile</h3>
 
-            <div className="profileImg mb-4">
-              <img src={img} alt="" height={"300px"} width={"300px"} className='dp' />
-            </div>
+
             <div className="ownerDetails">
 
               <table>
@@ -43,9 +40,9 @@ function ShopProfile() {
           </div>
           <div className="col-4 homeRight">
             <h5 className='text-center shopsSection mb-3'>SHOPS</h5>
-            <p><Link to={'/shopDetails'}>Inventory</Link></p>
-            <p><Link to={'/shopDetails'}>Billing</Link></p>
-            <p><Link to={'/shopDetails'}>Stocks</Link></p>
+            <p><Link to={'/inventory'}>Inventory</Link></p>
+            <p><Link to={'/billing'}>Billing</Link></p>
+            <p><Link to={'/stocks'}>Stocks</Link></p>
             <button className='btn btn-primary'>Billing History</button>
           </div>
         </div>

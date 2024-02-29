@@ -4,6 +4,7 @@ import './Login.css'
 import Header from '../../common/header/Header.jsx'
 import img from '../../../assets/pexels-rdne-stock-project-7563565 (1)-Photoroom-Photoroom.png-Photoroom.png'
 import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 
 function Login() {
@@ -29,12 +30,25 @@ function Login() {
       });
       const token = response.data.token;
       localStorage.setItem('token', token);
-      alert('Login Successful')
-      navigate('/home')
+      localStorage.setItem('username', username);
+      // alert('Login Successful')
+      Swal.fire({
+        title: "Login Successful!",
+        // text: "Redirecting to Home",
+        icon: "success"
+      });
+      setTimeout(() => {
+        navigate('/home')
+      }, 1000)
       console.log(response);
     } catch (error) {
       setError('Invalid username or password');
-      console.error('Error logging in:', error);
+      // console.error('Error logging in:', error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
     }
   };
 

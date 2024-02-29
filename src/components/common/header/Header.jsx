@@ -9,7 +9,7 @@ function Header() {
   const navigate = useNavigate()
 
   function logout() {
-    localStorage.removeItem('token')
+    localStorage.clear();
     navigate('/')
   }
 
