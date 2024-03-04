@@ -1,9 +1,15 @@
+
+
 .profileImg {
   overflow: hidden;
   border-radius: 50%;
   /* border: 1px solid black; */
   height: 150px;
   width: 150px;
+}
+
+.rowWrapper {
+  background-color: #fff7f7;
 }
 
 .dp {

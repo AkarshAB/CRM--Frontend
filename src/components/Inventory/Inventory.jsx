@@ -1,10 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Inventory.css'
 import { DataGrid } from '@mui/x-data-grid';
+import axios from 'axios';
+import { Formik } from 'formik';
 // import { useDataGridProps } from '@mui/x-data-grid';
 
 
+
 function Inventory() {
+
+  const [productsData, setProductsData] = useState([])
+
+  useEffect(() => {
+    const fetchInventory = async () => {
+      const token = localStorage.getItem('token')
+      console.log('token', token);
+      if (!token) {
+        alert('You are not authorised')
+      }
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/shop_app/products/',
+          {
+            headers: {
+              Authorization: `Token ${token}`
+            }
+          });
+        console.log(response);
+        setProductsData(response.data)
+      }
+      catch (error) {
+        console.log(error);
+      }
+    }
+    fetchInventory()
+  }, [])
+
+
+
 
   const columns = [
     { field: 'id', headerName: 'Prodct ID', width: 230 },

@@ -7,6 +7,7 @@ function BackButton() {
   const location = useLocation();
   const isLogin = location.pathname === '/'
   const isRegister = location.pathname === '/register'
+  const isHome = location.pathname === '/home'
   const navigate = useNavigate()
 
   const handleBackButton = () => {
@@ -14,7 +15,7 @@ function BackButton() {
   }
   return (
     <>
-      <button className='btn btn-outline-primary ms-5 m-3' style={{ display: isLogin || isRegister ? 'none' : '' }} onClick={handleBackButton}>
+      <button className='btn btn-outline-primary ms-5 m-3' style={{ display: isLogin || isRegister || isHome ? 'none' : '' }} onClick={handleBackButton}>
         &lt;
         &lt;
         Go Back

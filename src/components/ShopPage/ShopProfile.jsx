@@ -43,7 +43,7 @@ function ShopProfile() {
             <p><Link to={'/inventory'}>Inventory</Link></p>
             <p><Link to={'/billing'}>Billing</Link></p>
             <p><Link to={'/stocks'}>Stocks</Link></p>
-            <button className='btn btn-primary'>Billing History</button>
+            <Link to={'/BillingHistory'}> <button className='btn btn-primary'>Billing History</button></Link>
           </div>
         </div>
       </div>

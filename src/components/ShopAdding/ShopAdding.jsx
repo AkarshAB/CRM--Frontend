@@ -10,7 +10,7 @@ import {
 
 function ShopAdding() {
   const [formData, setFormData] = useState({
-    // shopName: '',
+    shopName: '',
     owner_name: '',
     address: '',
     email: '',
@@ -42,7 +42,7 @@ function ShopAdding() {
       console.log('Response:', response.data);
       alert('Shop added successfully:', response.data);
       setFormData({
-        // shopName: '',
+        shopName: '',
         owner_name: '',
         address: '',
         email: '',
@@ -69,12 +69,12 @@ function ShopAdding() {
             <form>
               <MDBRow>
                 <MDBCol>
-                  {/* <MDBInput
+                  <MDBInput
                     className="mb-4"
                     label="Shop Name"
                     name="shopName"
                     onChange={handleChange}
-                  /> */}
+                  />
                 </MDBCol>
               </MDBRow>
               <MDBInput

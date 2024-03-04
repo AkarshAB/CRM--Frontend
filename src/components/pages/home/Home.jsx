@@ -4,6 +4,7 @@ import './Home.css'
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 
+
 function Home() {
 
   const [userDetails, setUserDetails] = useState({})
@@ -37,9 +38,9 @@ function Home() {
 
   return (
     <>
-      <div className="container">
-        <div className="row mt-3 justify-content-center align-items-center ">
-          <div className="col-8 homeLeft">
+      <div className="container mt-5">
+        <div className="row w-75 mx-auto p-5 justify-content-around align-items-center border rowWrapper">
+          <div className="col-6 homeLeft">
             <h3 className='text-center my-3 '>OWNER PROFILE</h3>
 
 
@@ -55,15 +56,11 @@ function Home() {
                     <td>Email:</td>
                     <td>{userDetails.email}</td>
                   </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
                 </tbody>
               </table>
             </div>
           </div>
-          <div className="col-2 homeRight">
+          <div className="col-4 homeRight">
             <h5 className='text-center shopsSection mb-3'>SHOPS</h5>
             <p><Link to={'/shopDetails'}>Shop 1</Link></p>
             <p><Link to={'/shopDetails'}>Shop 2</Link></p>

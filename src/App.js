@@ -11,6 +11,7 @@ import Inventory from './components/Inventory/Inventory.jsx';
 import Billing from './components/Billing/Billing.jsx';
 import Stocks from './components/Stocks/Stocks.jsx';
 import BackButton from './components/common/Back Button/BackButton.jsx';
+import BillingHistory from './components/BillingHistory/BillingHistory.jsx';
 
 
 function App() {
@@ -25,8 +26,9 @@ function App() {
         <Route path='/shopDetails' element={<ShopProfile />}></Route>
         <Route path='/addShop' element={<ShopAdding />}></Route>
         <Route path='/inventory' element={<Inventory />}></Route>
-        <Route path='/billing' element={<Billing />}></Route>
         <Route path='/stocks' element={<Stocks />}></Route>
+        <Route path='/billing' element={<Billing />}></Route>
+        <Route path='/BillingHistory' element={<BillingHistory />}></Route>
       </Routes>
       <Footer />
       <div className=''></div>
