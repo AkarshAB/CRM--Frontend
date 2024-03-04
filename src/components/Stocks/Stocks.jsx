@@ -62,7 +62,7 @@ function Stocks() {
 
   return (
     <>
-      <div style={{ height: '83vh', width: '' }} className='my-auto mx-5 d-flex justify-content-center align-items-center '>
+      <div style={{ height: '83vh', width: '' }} className='my-auto mx-5 d-flex justify-content-center mt-3 '>
         <DataGrid className='border '
           rows={rows}
           columns={columns}

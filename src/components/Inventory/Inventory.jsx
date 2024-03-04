@@ -66,7 +66,10 @@ function Inventory() {
 
   return (
     <>
-      <div style={{ height: '83vh', width: '' }} className='my-auto mx-5 d-flex justify-content-center align-items-center '>
+      <div className='mx-5 mb-0'>
+        <button className='btn btn-primary'>Add Products</button>
+      </div>
+      <div style={{ height: '83vh', width: '' }} className='my-auto mx-5 d-flex justify-content-center mt-3'>
         <DataGrid className='border '
           rows={rows}
           columns={columns}
