@@ -6,6 +6,7 @@ import {
   MDBCol,
   MDBInput,
 } from 'mdb-react-ui-kit';
+import axios, { Axios } from 'axios';
 
 
 function AddEmployee() {
