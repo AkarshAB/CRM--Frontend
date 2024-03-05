@@ -13,6 +13,8 @@ function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate()
+  const [requiredUsername, setRequiredUsername] = useState()
+  const [requiredPassword, setRequiredPassword] = useState()
 
   const [fadeIn, setFadeIn] = useState(false);
 
@@ -23,6 +25,27 @@ function Login() {
 
 
   const handleLogin = async () => {
+
+    if (!username) {
+      setRequiredUsername('This field is Required')
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
+
+    }
+    else if (!password) {
+      setRequiredPassword("Please enter your password")
+      setRequiredUsername('')
+      return; //to stop further execution of the function.
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
+    }
+    else if (!username || !password)
     try {
       const response = await axios.post('http://localhost:8000/shop_app/login/', {
         username: username,
@@ -69,9 +92,14 @@ function Login() {
                 <p>LOGIN</p>
                 <label htmlFor="">Username</label>
                 <input type="text" name="" className='form-control' value={username} onChange={(e) => setUsername(e.target.value)} />
+                {
+                  requiredUsername && <p className='errorMsg'>*{requiredUsername}</p>
+                }
                 <label htmlFor="" className='mt-3'>Password</label>
                 <input type="password" name="" className='form-control' value={password} onChange={(e) => setPassword(e.target.value)} />
-
+                {
+                  requiredPassword && <p className='errorMsg'>*{requiredPassword}</p>
+                }
                 <button className='btn btn-success loginButton col-5' onClick={handleLogin}>
                   Login
                 </button>
