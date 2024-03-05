@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import './AddEmployee.css'
+axios
 import {
   MDBContainer,
   MDBRow,
   MDBCol,
   MDBInput,
 } from 'mdb-react-ui-kit';
+import axios from 'axios';
 
 
 function AddEmployee() {
