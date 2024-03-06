@@ -3,7 +3,7 @@ import './Register.css'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import { ValidationSchema } from '../../YupValidation/Validation'
+import { ValidationSchema } from '../../Yupvalidation/Validation'
 import { validateYupSchema } from 'formik'
 
 
@@ -32,13 +32,13 @@ function Register() {
         username: username,
         email: email,
         password: password
-      }, { abortEarly: false })
+      }, {abortEarly:false})
       console.log("formsubmitted");
 
       // const response = await axios.post('http://127.0.0.1:8000/shop_app/register/', {
-      // username: username,
-      // email: email,
-      // password: password
+        // username: username,
+        // email: email,
+        // password: password
       // });
       // alert('Registered successfully')
 
@@ -58,13 +58,8 @@ function Register() {
 
 
 
-      const newError = {}
-      error.inner.forEach((err) => {
-        newError[err.path] = err.message
-      })
-      setError(newError);
       // setError('Error registering user: ' + error.response.data.message);
-      console.error('Error registering user:', error.inner);
+      console.error('Error registering user:', error);
       // alert('Error registering user: ' + error.response.data.message);
       Swal.fire({
         icon: "error",
@@ -91,17 +86,11 @@ function Register() {
                 <h5 className='text-center'>REGISTER</h5>
                 <label htmlFor="">Username</label>
                 <input type="text" name="username" className='form-control' value={username} onChange={(e) => setUsername(e.target.value)} />
-                {error.username && <p className='error'>{error.username}</p>}
-
-
                 <label htmlFor="" className='mt-2'>Email</label>
                 <input type="text" name="email" className='form-control' value={email} onChange={(e) => setEmail(e.target.value)} />
-                {error.email && <p className='error'>{error.email}</p>}
-
-
                 <label htmlFor="" className='mt-2'>Password</label>
                 <input type="password" name="password" className='form-control' value={password} onChange={(e) => setPassword(e.target.value)} />
-                {error.password && <p className='error'>{error.password}</p>}
+
                 <button className='btn btn-success loginButton col-5 mt-4' onClick={handleRegister}>
                   Register
                 </button>
