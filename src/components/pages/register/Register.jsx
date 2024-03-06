@@ -3,6 +3,8 @@ import './Register.css'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import { ValidationSchema } from '../../Yupvalidation/Validation'
+import { validateYupSchema } from 'formik'
 
 
 function Register() {
@@ -22,27 +24,42 @@ function Register() {
   }, []);
 
 
-  const handleRegister = async () => {
+  const handleRegister = async (e) => {
+    e.preventDefault()
     try {
-      const response = await axios.post('http://127.0.0.1:8000/shop_app/register/', {
+
+      await ValidationSchema.validate({
         username: username,
         email: email,
         password: password
-      });
+      }, {abortEarly:false})
+      console.log("formsubmitted");
+
+      // const response = await axios.post('http://127.0.0.1:8000/shop_app/register/', {
+        // username: username,
+        // email: email,
+        // password: password
+      // });
       // alert('Registered successfully')
+
+
+
       Swal.fire({
         title: "Registered successfully",
         // text: "You clicked the button!",
         icon: "success"
       });
-      console.log(response);
+      // console.log(response);
 
       navigate('/')
       localStorage.setItem('username', username)
       localStorage.setItem('email', email)
     } catch (error) {
-      setError('Error registering user: ' + error.response.data.message);
-      console.error('Error registering user:', error);
+
+
+
+      // setError('Error registering user: ' + error.response.data.message);
+      console.error('Error registering user:', error.inner);
       // alert('Error registering user: ' + error.response.data.message);
       Swal.fire({
         icon: "error",
