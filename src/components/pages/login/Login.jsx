@@ -25,27 +25,30 @@ function Login() {
 
 
   const handleLogin = async () => {
-
-    if (!username) {
-      setRequiredUsername('This field is Required')
+    if (!username && !password) {
+      setRequiredPassword('')
+      setRequiredUsername('')
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Something went wrong!",
+        text: "Please enter Both Credentials",
       });
+      return;
+
 
     }
     else if (!password) {
-      setRequiredPassword("Please enter your password")
       setRequiredUsername('')
+      setRequiredPassword("Please enter your password")
       return; //to stop further execution of the function.
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong!",
-      });
+
     }
-    else if (!username || !password)
+    else if (!username) {
+      setRequiredPassword("")
+      setRequiredUsername('This field is Required')
+
+      return
+    }
     try {
       const response = await axios.post('http://localhost:8000/shop_app/login/', {
         username: username,
