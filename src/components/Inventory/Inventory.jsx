@@ -3,6 +3,7 @@ import './Inventory.css'
 import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
 import { Formik } from 'formik';
+import { Link } from 'react-router-dom';
 // import { useDataGridProps } from '@mui/x-data-grid';
 
 
@@ -67,12 +68,14 @@ function Inventory() {
   return (
     <>
       <div className='mx-5 mb-0'>
-        <button className='btn btn-primary'>Add Products</button>
+
+        <Link to={'/add-products'}><button className='btn btn-primary'>Add Products</button>
+        </Link>
       </div>
       <div style={{ height: '83vh', width: '' }} className='my-auto mx-5 d-flex justify-content-center mt-3'>
         <DataGrid className='border '
           rows={rows}
-          columns={columns}
+          columns={columns} 
           autoHeight
           disableRowSelectionOnClick
           initialState={{
