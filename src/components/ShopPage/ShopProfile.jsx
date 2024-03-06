@@ -40,7 +40,7 @@ function ShopProfile() {
           </div>
           <div className="col-4 homeRight">
 
-            <p><Link to={'/Add-Employee'}>Add Employees</Link></p>
+            <p><Link to={'/Manage-Employees'}>Manage Employees</Link></p>
             <p><Link to={'/inventory'}>Inventory</Link></p>
             <p><Link to={'/billing'}>Billing</Link></p>
             <p><Link to={'/stocks'}>Stocks</Link></p>

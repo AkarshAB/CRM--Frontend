@@ -14,6 +14,7 @@ import BackButton from './components/common/Back Button/BackButton.jsx';
 import BillingHistory from './components/BillingHistory/BillingHistory.jsx';
 import ServiceRequests from './components/ServiceRequests/ServiceRequests.jsx';
 import AddEmployee from './components/AddEmployee/AddEmployee.jsx';
+import ManageEmployee from './components/ManageEmployee/ManageEmployee.jsx';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route path='/billing' element={<Billing />}></Route>
         <Route path='/BillingHistory' element={<BillingHistory />}></Route>
         <Route path='/service-requests' element={<ServiceRequests />}></Route>
+        <Route path='/Manage-Employees' element={<ManageEmployee />}></Route>
         <Route path='/Add-Employee' element={<AddEmployee />}></Route>
       </Routes>
       <Footer />

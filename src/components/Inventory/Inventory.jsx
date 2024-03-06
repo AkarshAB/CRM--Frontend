@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import './Inventory.css'
 import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
-import { Formik } from 'formik';
-// import { useDataGridProps } from '@mui/x-data-grid';
 
 
 
