@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './AddProducts.css'
 import {
   MDBContainer,
@@ -6,11 +6,43 @@ import {
   MDBCol,
   MDBInput,
 } from 'mdb-react-ui-kit';
+import axios from 'axios';
 
 function AddProducts() {
+
+  const [formData, setFormData] = useState({
+
+  })
+
+  useEffect(() => {
+
+  }, [])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const token = localStorage.getItem('token')
+    try {
+      const response = await axios.post('',
+        formData,
+        {
+          headers: {
+            Authorization: `Token ${token}`
+          }
+        })
+      Swal.fire({
+        title: "Product added successfully!",
+        icon: "success"
+      });
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
-     <MDBContainer fluid className="mt-5 shopAddWrapper col-6">
+      <MDBContainer fluid className="mt-5 shopAddWrapper col-6">
         <section>
           <MDBRow className="justify-content-center">
             <MDBCol lg="8">

@@ -20,6 +20,12 @@ function ShopAdding() {
   console.log(formData);
 
   const handleSubmit = async (e) => {
+try {
+  
+} catch (err) {
+  console.log(err);
+}
+    
     e.preventDefault();
     const token = localStorage.getItem('token');
     console.log('Token:', token);

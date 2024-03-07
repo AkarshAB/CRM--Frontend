@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { ValidationSchema } from '../../Yupvalidation/Validation'
-import { validateYupSchema } from 'formik'
 
 
 function Register() {

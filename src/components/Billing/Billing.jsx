@@ -69,6 +69,11 @@ function Billing() {
 
   return (
     <>
+      <div className='container-fluid'>
+        <p>Name : </p>
+        <p>Contact : </p>
+
+      </div>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="spanning table">
           <TableHead>
@@ -111,6 +116,11 @@ function Billing() {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <div className="payment container text-center mt-5">
+        <h3>Payment Method</h3>
+
+      </div>
     </>
   )
 }
