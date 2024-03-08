@@ -11,7 +11,7 @@ function Register() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState({});
   console.log(username, email, password)
 
   const navigate = useNavigate();
@@ -24,24 +24,23 @@ function Register() {
 
 
   const handleRegister = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+
     try {
 
       await ValidationSchema.validate({
         username: username,
         email: email,
         password: password
-      }, {abortEarly:false})
-      console.log("formsubmitted");
+      }, { abortEarly: false });
 
-      // const response = await axios.post('http://127.0.0.1:8000/shop_app/register/', {
-        // username: username,
-        // email: email,
-        // password: password
-      // });
+      const response = await axios.post('http://127.0.0.1:8000/shop_app/register/', {
+        username: username,
+        email: email,
+        password: password
+      });
+      console.log(response);
       // alert('Registered successfully')
-
-
 
       Swal.fire({
         title: "Registered successfully",
@@ -53,12 +52,15 @@ function Register() {
       navigate('/')
       localStorage.setItem('username', username)
       localStorage.setItem('email', email)
+
     } catch (error) {
-
-
-
       // setError('Error registering user: ' + error.response.data.message);
-      console.error('Error registering user:', error);
+      console.error('Error registering user:', error.inner);
+      const newError = {}
+      error.inner.forEach((err) => {
+        newError[err.path] = err.message;
+        setError(newError)
+      })
       // alert('Error registering user: ' + error.response.data.message);
       Swal.fire({
         icon: "error",
@@ -85,10 +87,15 @@ function Register() {
                 <h5 className='text-center'>REGISTER</h5>
                 <label htmlFor="">Username</label>
                 <input type="text" name="username" className='form-control' value={username} onChange={(e) => setUsername(e.target.value)} />
+                {error.username && <p className='error'>*{error.username}</p>}
+
                 <label htmlFor="" className='mt-2'>Email</label>
                 <input type="text" name="email" className='form-control' value={email} onChange={(e) => setEmail(e.target.value)} />
+                {error.email && <p className='error'>*{error.email}</p>}
+
                 <label htmlFor="" className='mt-2'>Password</label>
                 <input type="password" name="password" className='form-control' value={password} onChange={(e) => setPassword(e.target.value)} />
+                {error.password && <p className='error'>*{error.password}</p>}
 
                 <button className='btn btn-success loginButton col-5 mt-4' onClick={handleRegister}>
                   Register

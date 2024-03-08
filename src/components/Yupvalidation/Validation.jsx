@@ -7,9 +7,5 @@ export const ValidationSchema = Yup.object({
     .email("Invaild email format"),
   password: Yup.string().required("Password is required")
     .min(8, "password must be at least 8 characters")
-    .matches(/[0-9]/, "must contain at least one number")
-    .matches(/[A-B]/, "must contain at least one uppercase letter")
-    .matches(/[a-b]/, "must contain at least one lowercase letter")
-
 })
 

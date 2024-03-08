@@ -10,22 +10,22 @@ import {
 
 function ShopAdding() {
   const [formData, setFormData] = useState({
-    shopName: '',
-    owner_name: '',
+    username: '',
+    shop_name: '',
     address: '',
-    email: '',
     contact_no: '',
+    email: ''
   });
 
   console.log(formData);
 
   const handleSubmit = async (e) => {
-try {
-  
-} catch (err) {
-  console.log(err);
-}
-    
+    try {
+
+    } catch (err) {
+      console.log(err);
+    }
+
     e.preventDefault();
     const token = localStorage.getItem('token');
     console.log('Token:', token);
@@ -48,11 +48,11 @@ try {
       console.log('Response:', response.data);
       alert('Shop added successfully:', response.data);
       setFormData({
-        shopName: '',
-        owner_name: '',
+        username: '',
+        shop_name: '',
         address: '',
-        email: '',
         contact_no: '',
+        email: ''
       });
       alert('Shop added successfully');
     } catch (error) {
@@ -77,16 +77,16 @@ try {
                 <MDBCol>
                   <MDBInput
                     className="mb-4"
-                    label="Shop Name"
-                    name="shopName"
+                    label="Owner Name"
+                    name="username"
                     onChange={handleChange}
                   />
                 </MDBCol>
               </MDBRow>
               <MDBInput
                 className="mb-4"
-                label="Owner Name"
-                name="owner_name"
+                label="Shop Name"
+                name="shop_name"
                 value={formData.owner_name}
                 onChange={handleChange}
               />
