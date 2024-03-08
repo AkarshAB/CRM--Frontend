@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './AddProducts.css'
 import {
   MDBContainer,
@@ -7,6 +7,7 @@ import {
   MDBInput,
 } from 'mdb-react-ui-kit';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function AddProducts() {
 

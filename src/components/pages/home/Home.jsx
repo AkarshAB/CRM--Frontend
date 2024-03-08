@@ -3,6 +3,7 @@ import './Home.css'
 // import img from '../../../assets/wp6733581.jpg'
 import { Link } from 'react-router-dom'
 import axios from 'axios';
+import Chart from './Chart';
 
 
 function Home() {
@@ -71,6 +72,8 @@ function Home() {
           </div>
         </div>
       </div>
+
+      <Chart />
     </>
   )
 }
