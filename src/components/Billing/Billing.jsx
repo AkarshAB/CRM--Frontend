@@ -117,9 +117,23 @@ function Billing() {
         </Table>
       </TableContainer>
 
-      <div className="payment container text-center mt-5">
+      <div className="payment m-5 text-center">
         <h3>Payment Method</h3>
+        <div className='paymentMethods'>
+          <div className="paymentCash" onClick={() => { document.getElementById('cash').click() }}>
+            <input type="radio" name="paymentMethod" id="cash" required />
+            <label htmlFor="cash" >Cash</label>
+          </div>
+          <div className="paymentUpi" onClick={() => { document.getElementById('upi').click() }}>
+            <input type="radio" name="paymentMethod" id="upi" required />
+            <label htmlFor="upi">UPI</label>
+          </div>
+          <div className="paymentCard" onClick={() => { document.getElementById('card').click() }}>
+            <input type="radio" name="paymentMethod" id="card" required />
+            <label htmlFor="card">Card</label>
+          </div>
 
+        </div>
       </div>
     </>
   )

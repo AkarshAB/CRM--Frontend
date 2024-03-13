@@ -12,6 +12,7 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [id, setId] = useState({})
   const navigate = useNavigate()
   const [requiredUsername, setRequiredUsername] = useState()
   const [requiredPassword, setRequiredPassword] = useState()
@@ -56,7 +57,10 @@ function Login() {
       });
       const token = response.data.token;
       localStorage.setItem('token', token);
-      localStorage.setItem('username', username);
+      // localStorage.setItem('username', username);
+
+      //setting id into the local storage.
+      localStorage.setItem('id', response.data.data.id);
       // alert('Login Successful')
       Swal.fire({
         title: "Login Successful!",

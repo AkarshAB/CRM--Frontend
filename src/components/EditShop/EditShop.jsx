@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import './ShopAdding.css';
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import {
   MDBContainer,
@@ -8,7 +7,8 @@ import {
   MDBInput,
 } from 'mdb-react-ui-kit';
 
-function ShopAdding() {
+function EditShop() {
+
   const [formData, setFormData] = useState({
     username: '',
     shop_name: '',
@@ -20,6 +20,7 @@ function ShopAdding() {
   console.log(formData);
 
   const handleSubmit = async (e) => {
+
 
     e.preventDefault();
     const token = localStorage.getItem('token');
@@ -62,8 +63,11 @@ function ShopAdding() {
     setFormData({ ...formData, [name]: value });
   };
 
+
+
   return (
-    <MDBContainer fluid className="mt-5 shopAddWrapper col-6">
+    <>
+      <MDBContainer fluid className="mt-5 shopAddWrapper col-6">
       <section>
         <MDBRow className="justify-content-center">
           <MDBCol lg="8">
@@ -123,6 +127,8 @@ function ShopAdding() {
       </section>
     </MDBContainer>
   );
+    </>
+  )
 }
 
-export default ShopAdding;
+export default EditShop

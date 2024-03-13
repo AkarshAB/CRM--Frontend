@@ -1,5 +1,3 @@
-
-
 .profileImg {
   overflow: hidden;
   border-radius: 50%;
@@ -59,4 +57,15 @@ tr:hover {
   align-items: center;
   flex-direction: column;
   /* border: 1px solid; */
+}
+
+.icons {
+  opacity: 0;
+  transition: opacity 0.3s linear;
+  cursor: pointer;
+  
+}
+
+.shopListWrapper:hover .icons {
+  opacity: 1;
 }
