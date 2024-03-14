@@ -5,15 +5,15 @@ import ReactApexChart from 'react-apexcharts';
 function Chart() {
     const [series, setSeries] = useState([
         {
-          name: "Session Duration",
+          name: "Profit",
           data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
         },
         {
-          name: "Page Views",
+          name: "Retail Price",
           data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
         },
         {
-          name: 'Total Visits',
+          name: 'Company Price',
           data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
         }
      ]);
@@ -27,7 +27,7 @@ function Chart() {
           },
         },
         dataLabels: {
-          enabled: false
+          enabled: true
         },
         stroke: {
           width: [5, 7, 5],
@@ -35,7 +35,7 @@ function Chart() {
           dashArray: [0, 8, 5]
         },
         title: {
-          text: 'Page Statistics',
+          text: 'Shop Statistics',
           align: 'left'
         },
         legend: {
