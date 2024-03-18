@@ -122,15 +122,15 @@ function Billing() {
         <div className='paymentMethods'>
           <div className="paymentCash" onClick={() => { document.getElementById('cash').click() }}>
             <input type="radio" name="paymentMethod" id="cash" required />
-            <label htmlFor="cash" >Cash</label>
+            <label htmlFor="cash" className='ms-3'>Cash</label>
           </div>
           <div className="paymentUpi" onClick={() => { document.getElementById('upi').click() }}>
             <input type="radio" name="paymentMethod" id="upi" required />
-            <label htmlFor="upi">UPI</label>
+            <label htmlFor="upi" className='ms-3'>UPI</label>
           </div>
           <div className="paymentCard" onClick={() => { document.getElementById('card').click() }}>
             <input type="radio" name="paymentMethod" id="card" required />
-            <label htmlFor="card">Card</label>
+            <label htmlFor="card" className='ms-3'>Card</label>
           </div>
 
         </div>

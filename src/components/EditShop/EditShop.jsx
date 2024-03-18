@@ -32,7 +32,7 @@ function EditShop() {
     }
 
     try {
-      const response = await axios.post(
+      const response = await axios.get(
         'http://127.0.0.1:8000/shop_app/shops/',
         formData,
         {
