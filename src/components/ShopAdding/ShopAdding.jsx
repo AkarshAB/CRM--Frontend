@@ -10,7 +10,7 @@ import {
 
 function ShopAdding() {
   const [formData, setFormData] = useState({
-    user: '',
+    user: [''],
     shop_name: '',
     address: '',
     contact_no: '',
@@ -43,7 +43,7 @@ function ShopAdding() {
       console.log('Response:', response.data);
       alert('Shop added successfully:', response.data);
       setFormData({
-        user: '',
+        user: [''],
         shop_name: '',
         address: '',
         contact_no: '',
@@ -59,7 +59,12 @@ function ShopAdding() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+
+    if (name === 'user') { // If the field is 'user'
+      setFormData({ ...formData, [name]: [value] }); // Wrap value in an array
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   return (
@@ -75,6 +80,7 @@ function ShopAdding() {
                     label="Owner Name"
                     name="user"
                     onChange={handleChange}
+                    value={formData.user['']}
                   />
                 </MDBCol>
               </MDBRow>
