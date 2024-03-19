@@ -1,9 +1,25 @@
 import React from 'react'
 import './ShopProfile.css'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import axios from 'axios'
 
 
 function ShopProfile() {
+
+  const id = useParams()
+  console.log(id)
+
+  const fetchShopDetails = async() => {
+    const token = localStorage.getItem('token')
+    const response = await axios.get(`http://127.0.0.1:8000/shop_app/shops/${id}`,
+    {
+      headers: {
+        Authorization: `Token ${token}`
+      }
+    })
+    console.log(response)
+  }
+  
   return (
     <>
       <div className="container">

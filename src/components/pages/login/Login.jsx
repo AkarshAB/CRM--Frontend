@@ -57,7 +57,7 @@ function Login() {
       });
       const token = response.data.token;
       localStorage.setItem('token', token);
-      // localStorage.setItem('username', username);
+      localStorage.setItem('user', username);
 
       //setting id into the local storage.
       localStorage.setItem('id', response.data.data.id);

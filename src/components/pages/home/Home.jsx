@@ -44,8 +44,15 @@ function Home() {
               Authorization: `Token ${token}`
             }
           })
-        console.log('shop', response)
-        setShopListDetails(response.data)
+        console.log('shop', response.data)
+        // setShopListDetails(response.data)
+
+        //fetching shops by the logged in user only
+        const user = localStorage.getItem('user')
+        const shopListOfLoggedinUser = response.data.filter(shop => shop.user === user)
+        setShopListDetails(shopListOfLoggedinUser)
+        console.log(shopListDetails)
+
         console.log(shopListDetails)
       } catch (error) {
         console.log(error)
@@ -85,11 +92,15 @@ function Home() {
           </div>
           <div className="col-4 homeRight">
             <h5 className='text-center shopsSection mb-3'>SHOPS</h5>
-            <div className="shopListWrapper d-flex justify-content-center align-items-center w-100 mb-3 text-center gap-5">
-              <Link to={'/editShop'}><i className="fa-solid fa-edit icons"></i></Link>
-              <p className='mb-0 text-center'><Link to={'/shopDetails'}>Shop 1</Link></p>
-              <i className="fa-solid fa-xmark icons"></i>
-            </div>
+            {
+              shopListDetails.map(shopList => (
+                <div className="shopListWrapper d-flex justify-content-center align-items-center w-100 mb-3 text-center gap-5">
+                  <Link to={'/editShop'}><i className="fa-solid fa-edit icons"></i></Link>
+                  <p className='mb-0 text-center'><Link to={`/shopDetails/${shopList.id}`}>{shopList.shop_name}</Link></p>
+                  <i className="fa-solid fa-xmark icons"></i>
+                </div>
+              ))
+            }
 
             <Link to={'/addShop'}><div className="btn btn-primary">Add Shop</div></Link>
           </div>
