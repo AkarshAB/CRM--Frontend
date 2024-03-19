@@ -12,12 +12,16 @@ import Swal from 'sweetalert2';
 function AddProducts() {
 
   const [formData, setFormData] = useState({
+    shop_name: '',
+    image: '',
+    pro_company: '',
+    product_name: '',
+    description: '',
+    price: '',
+    selling_price: '',
+    stock_quantity: ''
+  });
 
-  })
-
-  useEffect(() => {
-
-  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,6 +43,10 @@ function AddProducts() {
     } catch (error) {
       console.log(error);
     }
+
+  }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
   }
 
   return (
@@ -52,32 +60,67 @@ function AddProducts() {
                   <MDBCol>
                     <MDBInput
                       className="mb-4"
-                      label="Product Name"
+                      label="Shop Name"
                       name=""
+                      value={formData.shop_name}
+                      onChange={handleChange}
                     />
                   </MDBCol>
                 </MDBRow>
                 <MDBInput
                   className="mb-4"
-                  label="Brand Name"
+                  label="Product Company"
                   name=""
+                  value={formData.pro_company}
+                  onChange={handleChange}
                 />
                 <MDBInput
                   className="mb-4"
-                  label="price"
-                  name=""
-                />
-                <MDBInput
-                  className="mb-4"
-                  label=""
+                  label="Product Name"
                   type=""
                   name=""
+                  value={formData.product_name}
+                  onChange={handleChange}
                 />
                 <MDBInput
                   className="mb-4"
-                  label=" "
+                  label="Description "
                   type=""
                   name=""
+                  value={formData.description}
+                  onChange={handleChange}
+                />
+                <MDBInput
+                  className="mb-4"
+                  label="Price"
+                  type=""
+                  name=""
+                  value={formData.price}
+                  onChange={handleChange}
+                />
+                <MDBInput
+                  className="mb-4"
+                  label="Selling Price "
+                  type=""
+                  name=""
+                  value={formData.selling_price}
+                  onChange={handleChange}
+                />
+                <MDBInput
+                  className="mb-4"
+                  label="Stock Quantity "
+                  type=""
+                  name=""
+                  value={formData.stock_quantity}
+                  onChange={handleChange}
+                />
+                <label htmlFor="">Choose product image</label>
+                <MDBInput
+                  className="mb-4"
+                  type='file'
+                  name=""
+                  value={formData.image}
+                  onChange={handleChange}
                 />
                 <div className="text-center">
                   <button
