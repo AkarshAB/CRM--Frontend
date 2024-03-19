@@ -12,3 +12,10 @@
   padding: 20px 30px;
   border-radius: 10px;
 }
+
+.paymentCash:hover,
+.paymentUpi:hover,
+.paymentCard:hover {
+  background-color: lightblue;
+  cursor: pointer;
+}

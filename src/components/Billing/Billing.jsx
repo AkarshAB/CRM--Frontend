@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
+import Cash from './Cash.jsx';
 
 const DISCOUNT = 0.07;
 
@@ -65,6 +66,15 @@ function Billing() {
     fetchBillingData();
   }, [])
 
+  const [isCash, setIsCash] = useState(false)
+
+  const handleCash = () => {
+    document.getElementById('cash').click()
+    const cash = document.getElementById('cashDiv')
+    cash.style.backgroundColor = 'lightblue'
+    setIsCash(true)
+  }
+
 
 
   return (
@@ -118,9 +128,9 @@ function Billing() {
       </TableContainer>
 
       <div className="payment m-5 text-center">
-        <h3>Payment Method</h3>
+        <h3 className='mb-4'>Payment Method</h3>
         <div className='paymentMethods'>
-          <div className="paymentCash" onClick={() => { document.getElementById('cash').click() }}>
+          <div className="paymentCash" onClick={handleCash} id='cashDiv'>
             <input type="radio" name="paymentMethod" id="cash" required />
             <label htmlFor="cash" className='ms-3'>Cash</label>
           </div>
@@ -135,6 +145,9 @@ function Billing() {
 
         </div>
       </div>
+      {
+        isCash ? <Cash /> : ''
+      }
     </>
   )
 }
