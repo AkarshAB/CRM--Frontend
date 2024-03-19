@@ -9,6 +9,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
 import Cash from './Cash.jsx';
+import UPI from './UPI.jsx';
+import Card from './Card.jsx';
 
 const DISCOUNT = 0.07;
 
@@ -67,24 +69,78 @@ function Billing() {
   }, [])
 
   const [isCash, setIsCash] = useState(false)
+  const [isUpi, setIsUpi] = useState(false)
+  const [isCard, setIsCard] = useState(false)
+
+
 
   const handleCash = () => {
     document.getElementById('cash').click()
     const cash = document.getElementById('cashDiv')
+    const upi = document.getElementById('upiDiv')
+    const card = document.getElementById('cardDiv')
+
+
     cash.style.backgroundColor = 'lightblue'
+    upi.style.backgroundColor = ''
+    card.style.backgroundColor = ''
+
+
     setIsCash(true)
+    setIsUpi(false)
+    setIsCard(false)
   }
+
+
+
+  const handleUpi = () => {
+    document.getElementById('upi').click()
+
+    const cash = document.getElementById('cashDiv')
+    const upi = document.getElementById('upiDiv')
+    const card = document.getElementById('cardDiv')
+
+
+    cash.style.backgroundColor = ''
+    upi.style.backgroundColor = 'lightblue'
+    card.style.backgroundColor = ''
+    setIsUpi(true)
+    setIsCash(false)
+    setIsCard(false)
+
+  }
+
+
+  const handleCard = () => {
+    document.getElementById('card').click()
+
+    const cash = document.getElementById('cashDiv')
+    const upi = document.getElementById('upiDiv')
+    const card = document.getElementById('cardDiv')
+
+
+    cash.style.backgroundColor = ''
+    upi.style.backgroundColor = ''
+    card.style.backgroundColor = 'lightblue'
+    setIsCard(true)
+    setIsUpi(false)
+    setIsCash(false)
+
+
+  }
+
+
 
 
 
   return (
     <>
-      <div className='container-fluid'>
+      <div className='container-fluid ms-5'>
         <p>Name : </p>
         <p>Contact : </p>
 
       </div>
-      <TableContainer component={Paper}>
+      <TableContainer className='p-5 ' component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="spanning table">
           <TableHead>
             <TableRow>
@@ -134,11 +190,11 @@ function Billing() {
             <input type="radio" name="paymentMethod" id="cash" required />
             <label htmlFor="cash" className='ms-3'>Cash</label>
           </div>
-          <div className="paymentUpi" onClick={() => { document.getElementById('upi').click() }}>
+          <div className="paymentUpi" onClick={handleUpi} id='upiDiv'>
             <input type="radio" name="paymentMethod" id="upi" required />
             <label htmlFor="upi" className='ms-3'>UPI</label>
           </div>
-          <div className="paymentCard" onClick={() => { document.getElementById('card').click() }}>
+          <div className="paymentCard" onClick={handleCard} id='cardDiv'>
             <input type="radio" name="paymentMethod" id="card" required />
             <label htmlFor="card" className='ms-3'>Card</label>
           </div>
@@ -147,6 +203,12 @@ function Billing() {
       </div>
       {
         isCash ? <Cash /> : ''
+      }
+      {
+        isUpi ? <UPI /> : ''
+      }
+      {
+        isCard ? <Card /> : ''
       }
     </>
   )
