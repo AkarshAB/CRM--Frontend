@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './ShopProfile.css'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
@@ -6,20 +6,32 @@ import axios from 'axios'
 
 function ShopProfile() {
 
-  const id = useParams()
+  const [fetchedShopDetails, setFetchedShopDetails] = useState({})
+
+  const { id } = useParams()
   console.log(id)
 
-  const fetchShopDetails = async() => {
+  const fetchShopDetails = async () => {
     const token = localStorage.getItem('token')
-    const response = await axios.get(`http://127.0.0.1:8000/shop_app/shops/${id}`,
-    {
-      headers: {
-        Authorization: `Token ${token}`
-      }
-    })
-    console.log(response)
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/shop_app/shops/${id}`,
+        {
+          headers: {
+            Authorization: `Token ${token}`
+          }
+        })
+      console.log(response)
+      setFetchedShopDetails(response.data)
+
+    } catch (error) {
+      console.log(error)
+    }
   }
-  
+
+  useEffect(() => {
+    fetchShopDetails()
+  }, [])
+
   return (
     <>
       <div className="container">
@@ -33,23 +45,23 @@ function ShopProfile() {
               <table>
                 <tr>
                   <td>Shop Name:</td>
-                  <td>Ration Kada</td>
+                  <td>{fetchedShopDetails.shop_name}</td>
                 </tr>
                 <tr>
                   <td>Owner Name:</td>
-                  <td>Akarsh</td>
+                  <td>{fetchedShopDetails.user}</td>
                 </tr>
                 <tr>
                   <td>Address:</td>
-                  <td>Alayil House P.O. Kothaparambu, Kodungallur, Thrissur Dt.</td>
+                  <td>{fetchedShopDetails.address}</td>
                 </tr>
                 <tr>
                   <td>Email:</td>
-                  <td>aka@gmail.com</td>
+                  <td>{fetchedShopDetails.email}</td>
                 </tr>
                 <tr>
                   <td>Shop Mobile Number:</td>
-                  <td>8921400258</td>
+                  <td>{fetchedShopDetails.contact_no}</td>
                 </tr>
               </table>
             </div>
