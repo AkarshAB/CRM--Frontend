@@ -38,7 +38,7 @@ function App() {
         <Route path='/Manage-Employees' element={<ManageEmployee />}></Route>
         <Route path='/Add-Employee' element={<AddEmployee />}></Route>
         <Route path='/add-products' element={<AddProducts />}></Route>
-        <Route path='/editShop' element={<EditShop />}></Route>
+        <Route path='/editShop/:id' element={<EditShop />}></Route>
       </Routes>
       <Footer />
       <div className=''></div>

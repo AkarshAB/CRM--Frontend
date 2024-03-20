@@ -114,7 +114,7 @@ function Home() {
             {
               shopListDetails.map(shopList => (
                 <div className="shopListWrapper d-flex justify-content-center align-items-center w-100 mb-3 text-center gap-5">
-                  <Link to={'/editShop'}><i className="fa-solid fa-edit icons"></i></Link>
+                  <Link to={`/editShop/${shopList.id}`}><i className="fa-solid fa-edit icons"></i></Link>
                   <p className='mb-0 text-center'><Link to={`/shopDetails/${shopList.id}`}>{shopList.shop_name}</Link></p>
                   <i className="fa-solid fa-xmark icons" onClick={() => deleteShop(shopList.id)}></i>
 
