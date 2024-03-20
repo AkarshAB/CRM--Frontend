@@ -6,6 +6,7 @@ import axios from 'axios';
 import Chart from './Chart';
 
 
+
 function Home() {
 
   const [userDetails, setUserDetails] = useState({})
@@ -62,7 +63,25 @@ function Home() {
     fetchShopList()
   }, [])
 
+  const deleteShop = async (id) => {
+    const token1 = localStorage.getItem('token')
+    console.log(token1)
+    try {
+      const response = await axios.delete(`http://127.0.0.1:8000/shop_app/shops/${id}/`,
+        {
+          headers: {
+            Authorization: `token ${token1}`
+          }
+        })
+      // window.location.reload()
+      // Filter out the deleted shop from shopListDetails
+      setShopListDetails(prevShopList => prevShopList.filter(shop => shop.id !== id));
 
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
 
 
@@ -97,7 +116,8 @@ function Home() {
                 <div className="shopListWrapper d-flex justify-content-center align-items-center w-100 mb-3 text-center gap-5">
                   <Link to={'/editShop'}><i className="fa-solid fa-edit icons"></i></Link>
                   <p className='mb-0 text-center'><Link to={`/shopDetails/${shopList.id}`}>{shopList.shop_name}</Link></p>
-                  <i className="fa-solid fa-xmark icons"></i>
+                  <i className="fa-solid fa-xmark icons" onClick={() => deleteShop(shopList.id)}></i>
+
                 </div>
               ))
             }

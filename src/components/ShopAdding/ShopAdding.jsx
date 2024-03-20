@@ -7,8 +7,10 @@ import {
   MDBCol,
   MDBInput,
 } from 'mdb-react-ui-kit';
+import { Navigate, useNavigate } from 'react-router';
 
 function ShopAdding() {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     user: [''],
     shop_name: '',
@@ -41,7 +43,7 @@ function ShopAdding() {
         }
       );
       console.log('Response:', response.data);
-      alert('Shop added successfully:', response.data);
+      // alert('Shop added successfully:', response.data);
       setFormData({
         user: [''],
         shop_name: '',
@@ -50,6 +52,7 @@ function ShopAdding() {
         email: ''
       });
       alert('Shop added successfully');
+      navigate('/home')
     } catch (error) {
       console.error('Error adding shop:', error);
       alert('Error adding shop:', error);
