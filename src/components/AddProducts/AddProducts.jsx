@@ -48,11 +48,11 @@ function AddProducts() {
   useEffect(() => {
     console.log(formData); // This will log the updated formData
   }, [formData]);
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
       setFormData({...formData, [name]:(value)});
-      console.log(formData)
+      // console.log(formData)
   }
 
   return (
