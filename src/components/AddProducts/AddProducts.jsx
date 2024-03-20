@@ -45,8 +45,14 @@ function AddProducts() {
     }
 
   }
+  useEffect(() => {
+    console.log(formData); // This will log the updated formData
+  }, [formData]);
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
+      setFormData({...formData, [name]:(value)});
+      console.log(formData)
   }
 
   return (
@@ -61,7 +67,7 @@ function AddProducts() {
                     <MDBInput
                       className="mb-4"
                       label="Shop Name"
-                      name=""
+                      name="shop_name"
                       value={formData.shop_name}
                       onChange={handleChange}
                     />
@@ -70,47 +76,43 @@ function AddProducts() {
                 <MDBInput
                   className="mb-4"
                   label="Product Company"
-                  name=""
+                  name="pro_company"
                   value={formData.pro_company}
                   onChange={handleChange}
                 />
                 <MDBInput
                   className="mb-4"
                   label="Product Name"
-                  type=""
-                  name=""
+                  name="product_name"
                   value={formData.product_name}
                   onChange={handleChange}
                 />
                 <MDBInput
                   className="mb-4"
                   label="Description "
-                  type=""
-                  name=""
+                  name="description"
                   value={formData.description}
                   onChange={handleChange}
                 />
                 <MDBInput
                   className="mb-4"
                   label="Price"
-                  type=""
-                  name=""
+                  name="price"
                   value={formData.price}
                   onChange={handleChange}
                 />
                 <MDBInput
                   className="mb-4"
                   label="Selling Price "
-                  type=""
-                  name=""
+                  name="selling_price"
                   value={formData.selling_price}
                   onChange={handleChange}
                 />
                 <MDBInput
                   className="mb-4"
                   label="Stock Quantity "
-                  type=""
-                  name=""
+                  name="stock_quantity"
+                  type='number'
                   value={formData.stock_quantity}
                   onChange={handleChange}
                 />
@@ -118,7 +120,7 @@ function AddProducts() {
                 <MDBInput
                   className="mb-4"
                   type='file'
-                  name=""
+                  name="image"
                   value={formData.image}
                   onChange={handleChange}
                 />
@@ -126,6 +128,7 @@ function AddProducts() {
                   <button
                     className="btn btn-primary col-6"
                     type="submit"
+                    onClick={handleSubmit}
                   >
                     Add Products
                   </button>
