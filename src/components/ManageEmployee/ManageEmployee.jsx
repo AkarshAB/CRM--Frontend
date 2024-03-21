@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import EditEmployees from '../../EditEmployee/EditEmployees'
 
 
 function ManageEmployee() {
@@ -21,7 +23,7 @@ function ManageEmployee() {
       <td>Mark</td>
       <td>Otto</td>
       <td>@mdo</td>
-      <td className='d-flex gap-4'><i className="fa-regular fa-pen-to-square fs-4"></i><i className="fa-solid fa-xmark fs-4"></i></td>
+      <td className='d-flex gap-4'><Link to={'/EditEmployees'}><i className="fa-regular fa-pen-to-square fs-4"></i></Link><i className="fa-solid fa-xmark fs-4"></i></td>
     </tr>
   </tbody>
 </table>

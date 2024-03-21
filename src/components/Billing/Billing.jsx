@@ -135,12 +135,12 @@ function Billing() {
 
   return (
     <>
-      <div className='container-fluid ms-5'>
+      <div className=' ms-5'>
         <p>Name : </p>
         <p>Contact : </p>
-
+        <input  className=' form-control' style={{ width: '300px' }} type="text" placeholder='search' />
       </div>
-      <TableContainer className='p-5 ' component={Paper}>
+      <TableContainer className='p-5 mt-3 ' component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="spanning table">
           <TableHead>
             <TableRow>
@@ -198,8 +198,10 @@ function Billing() {
             <input type="radio" name="paymentMethod" id="card" required />
             <label htmlFor="card" className='ms-3'>Card</label>
           </div>
-
         </div>
+      </div>
+      <div className='p-4 d-flex justify-content-center'>
+        <button className='btn btn-primary'>save</button>
       </div>
       {
         isCash ? <Cash /> : ''

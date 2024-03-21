@@ -9,6 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
+import EditInventory from '../EditInventory/EditInventory';
 
 
 function Inventory() {
@@ -51,6 +52,7 @@ function Inventory() {
         <Link to={'/add-products'}><button className='btn btn-primary'>Add Products</button>
         </Link>
       </div>
+      <Link to={'/ViewProduct'}>
       <div className="productCards m-5">
         <Card sx={{ maxWidth: 345 }}>
           <CardActionArea>
@@ -70,13 +72,13 @@ function Inventory() {
               </Typography>
             </CardContent>
           </CardActionArea>
-          <CardActions>
-            <Button size="small" color="primary">
-              Share
-            </Button>
+          <CardActions className='d-flex justify-content-center '>
+        <Link to={'/EditInventory'}><button className='btn btn-primary '>Edit</button></Link>
+        <button className='btn btn-danger'>Delete</button>
           </CardActions>
         </Card>
       </div>
+      </Link>
     </>
   )
 }

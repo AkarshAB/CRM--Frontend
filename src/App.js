@@ -17,6 +17,9 @@ import AddEmployee from './components/AddEmployee/AddEmployee.jsx';
 import ManageEmployee from './components/ManageEmployee/ManageEmployee.jsx';
 import AddProducts from './components/AddProducts/AddProducts.jsx';
 import EditShop from './components/EditShop/EditShop.jsx';
+import EditEmployees from './EditEmployee/EditEmployees.jsx';
+import EditInventory from './components/EditInventory/EditInventory.jsx';
+import ViewProduct from './components/ViewProduct/ViewProduct.jsx';
 
 
 function App() {
@@ -39,6 +42,10 @@ function App() {
         <Route path='/Add-Employee' element={<AddEmployee />}></Route>
         <Route path='/add-products' element={<AddProducts />}></Route>
         <Route path='/editShop/:id' element={<EditShop />}></Route>
+        <Route path='/EditEmployees' element={<EditEmployees />}></Route>
+        <Route path='/EditInventory' element={<EditInventory />}></Route>
+        <Route path='/ViewProduct' element={<ViewProduct />}></Route>
+
       </Routes>
       <Footer />
       <div className=''></div>
