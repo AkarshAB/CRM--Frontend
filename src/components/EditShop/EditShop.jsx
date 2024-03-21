@@ -10,11 +10,11 @@ import { useParams } from 'react-router';
 
 function EditShop() {
 
-  const [result, setResult] = useState()
+  const [result, setResult] = useState(null)
   const { id } = useParams()
 
   const [formData, setFormData] = useState({
-    username: '',
+    user: [''],
     shop_name: '',
     address: '',
     contact_no: '',
@@ -23,15 +23,10 @@ function EditShop() {
 
   // console.log(formData);
 
-  const handleSubmit = async (e) => {
-
-    console.log({ id })
-  }
+  
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    // console.log('Token:', token);
-    // console.log('Form data:', formData);
     if (!token) {
       alert('You are not authorized');
       return;
@@ -46,25 +41,55 @@ function EditShop() {
             },
           }
         );
-        console.log('Response:', response);
-        setResult(response.data)
-        console.log('result', result)
+        setResult(response.data);
+        // Set form data only if result is available
+        if (response.data) {
+          setFormData({
+            user: response.data.user || [''],
+            shop_name: response.data.shop_name || '',
+            address: response.data.address || '',
+            contact_no: response.data.contact_no || '',
+            email: response.data.email || ''
+          });
+        }
       }
       catch (error) {
-        console.error('Error adding shop:', error);
-        alert('Error adding shop:', error);
+        console.error('Error fetching shop data:', error);
+        alert('Error fetching shop data:', error);
       }
     }
-    fetchCurrentShopData()
-    console.log('result', result)
-  }, [])
+    fetchCurrentShopData();
+  }, [id]);
 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
 
+    if (name === 'user') { // If the field is 'user'
+      setFormData({ ...formData, [name]: [value] }); // Wrap value in an array
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
+  console.log(formData)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('token')
+    try {
+      const response = await axios.put(`http://127.0.0.1:8000/shop_app/shops/${id}/`,
+        formData, {
+        headers: {
+          Authorization: `token ${token}`
+        }
+      })
+      alert('form submitted')
+
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
 
 
   return (
@@ -80,7 +105,7 @@ function EditShop() {
                       className="mb-4"
                       label='Username'
                       name="username"
-                      value={formData.user || (result && result.user)}
+                      value={formData.user}
                       onChange={handleChange}
                     />
                   </MDBCol>
@@ -89,14 +114,14 @@ function EditShop() {
                   className="mb-4"
                   label="Shop Name"
                   name="shop_name"
-                  value={formData.shop_name || (result && result.shop_name)}
+                  value={formData.shop_name}
                   onChange={handleChange}
                 />
                 <MDBInput
                   className="mb-4"
                   label="Address"
                   name="address"
-                  value={formData.address || (result && result.address)}
+                  value={formData.address}
                   onChange={handleChange}
                 />
                 <MDBInput
@@ -104,7 +129,7 @@ function EditShop() {
                   label="Email"
                   type="email"
                   name="email"
-                  value={formData.email || (result && result.email)}
+                  value={formData.email}
                   onChange={handleChange}
                 />
                 <MDBInput
@@ -112,7 +137,7 @@ function EditShop() {
                   label="Contact No."
                   type="tel"
                   name="contact_no"
-                  value={formData.contact_no || (result && result.contact_no)}
+                  value={formData.contact_no}
                   onChange={handleChange}
                 />
                 <div className="text-center">
@@ -121,7 +146,7 @@ function EditShop() {
                     type="submit"
                     onClick={handleSubmit}
                   >
-                    Add Shop
+                    Save Changes
                   </button>
                 </div>
               </form>
