@@ -1,0 +1,122 @@
+import React, { useEffect, useState } from 'react'
+import {
+    MDBContainer,
+    MDBRow,
+    MDBCol,
+    MDBInput,
+  } from 'mdb-react-ui-kit';
+import { useParams } from 'react-router';
+import axios from 'axios';
+
+function UpdateStock() {
+const [result,setResult] = useState(null)
+const {id} = useParams()
+
+const [formData, setFormData] = useState({
+    pro_company: '',
+    productname: '',
+    quantity: ''
+});
+
+useEffect(() => {
+    const token = localStorage.getItem('token');
+    const fetchUpdateStock = async () =>{
+        try{
+            const response = await axios.get(``,
+            {
+             headers:{
+                Authorization:`Token ${token}`
+             },  
+            }
+            );
+            setResult(response.data);
+            if(response.data){
+                setFormData({
+                    pro_company:response.data.pro_company || '',
+                    productname:response.data.productname || '',
+                    quantity:response.data.quantity || '' 
+                });
+            }
+        }
+        catch(error){
+            console.error('error fetching update Stock data');
+            alert('error fetching update Stock data');
+        }
+    }
+    fetchUpdateStock()
+}, [id]);
+
+const handleChange = (e) => {
+    const {name,value} = e.target;
+
+    setFormData({...formData, [name]: value });
+};
+console.log(formData);
+
+const handleSubmit = async (e) => {
+    e.preventDefault()
+    const token = localStorage.getItem('token')
+    try{
+        const response = await axios.put(`${id}`,
+        formData, {
+            headers: {
+                Authorization:`Token ${token}`
+            }
+        })
+        alert('updated')
+    }catch(error){
+        console.log(error);
+    }
+}
+  return (
+    <>
+    <MDBContainer fluid className="mt-5 shopAddWrapper col-6">
+      <section>
+        <MDBRow className="justify-content-center">
+          <MDBCol lg="8">
+            <form>
+              <MDBRow>
+                <MDBCol>
+                  <MDBInput
+                    className="mb-4"
+                    label='Product Company'
+                    name="pro_company"
+                    value={formData.pro_company}
+                    onChange={handleChange}
+                  />
+                </MDBCol>
+              </MDBRow>
+              <MDBInput
+                className="mb-4"
+                label="Product Name"
+                name="productname"
+                value={formData.productname}
+                onChange={handleChange}
+              />
+              <MDBInput
+                className="mb-4"
+                label="Quantity"
+                name="quantity"
+                value={formData.quantity}
+                onChange={handleChange}
+              />
+              <div className="text-center">
+                <button
+                  className="btn btn-primary col-6"
+                  type="submit"
+                  onClick={handleSubmit}
+                >
+                  Save Changes
+                </button>
+              </div>
+            </form>
+          </MDBCol>
+        </MDBRow>
+      </section>
+    </MDBContainer>
+
+  </>
+  )
+}
+
+export default UpdateStock

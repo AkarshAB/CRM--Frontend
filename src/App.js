@@ -21,6 +21,7 @@ import EditEmployees from './EditEmployee/EditEmployees.jsx';
 import EditInventory from './components/EditInventory/EditInventory.jsx';
 import ViewProduct from './components/ViewProduct/ViewProduct.jsx';
 import AddStock from './components/AddStock/AddStock.jsx';
+import UpdateStock from './components/UpdateStock/UpdateStock.jsx';
 
 
 function App() {
@@ -47,7 +48,7 @@ function App() {
         <Route path='/EditInventory' element={<EditInventory />}></Route>
         <Route path='/ViewProduct' element={<ViewProduct />}></Route>
         <Route path='/add-stock' element={<AddStock />}></Route>
-
+        <Route path='/updateStock' element={<UpdateStock />}></Route>
       </Routes>
       <Footer />
       <div className=''></div>
