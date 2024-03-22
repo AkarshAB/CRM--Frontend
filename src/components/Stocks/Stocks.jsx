@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Stocks.css'
 import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
+import { Link, NavLink } from 'react-router-dom'
 
 
 
@@ -62,7 +63,10 @@ function Stocks() {
 
   return (
     <>
-      <div style={{ height: '83vh', width: '' }} className='my-auto mx-5 d-flex justify-content-center mt-3 '>
+      <div>
+        <Link to={'/add-stock'}><button className='btn btn-primary ms-5 my-3'>Add Stock</button></Link>
+      </div>
+      <div style={{ height: '61vh', width: '' }} className='my-auto mx-5 d-flex justify-content-center mt-3 '>
         <DataGrid className='border '
           rows={rows}
           columns={columns}
