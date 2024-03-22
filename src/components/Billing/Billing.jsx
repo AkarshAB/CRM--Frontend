@@ -200,9 +200,6 @@ function Billing() {
           </div>
         </div>
       </div>
-      <div className='p-4 d-flex justify-content-center'>
-        <button className='btn btn-primary'>save</button>
-      </div>
       {
         isCash ? <Cash /> : ''
       }
@@ -212,6 +209,9 @@ function Billing() {
       {
         isCard ? <Card /> : ''
       }
+        <div className='p-4 d-flex justify-content-center'>
+        <button className='btn btn-primary'>save</button>
+      </div>
     </>
   )
 }
