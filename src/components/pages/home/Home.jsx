@@ -50,7 +50,7 @@ function Home() {
 
         //fetching shops by the logged in user only
         const user = localStorage.getItem('user')
-        const shopListOfLoggedinUser = response.data.filter(shop => shop.user === user)
+        const shopListOfLoggedinUser = response.data.filter(shop => String(shop.user) === user)
         setShopListDetails(shopListOfLoggedinUser)
         console.log(shopListDetails)
 
@@ -112,8 +112,8 @@ function Home() {
           <div className="col-4 homeRight">
             <h5 className='text-center shopsSection mb-3'>SHOPS</h5>
             {
-              shopListDetails.map(shopList => (
-                <div className="shopListWrapper d-flex justify-content-center align-items-center w-100 mb-3 text-center gap-5">
+              shopListDetails.map((shopList, index) => (
+                <div key={index} className="shopListWrapper d-flex justify-content-center align-items-center w-100 mb-3 text-center gap-5">
                   <Link to={`/editShop/${shopList.id}`}><i className="fa-solid fa-edit icons"></i></Link>
                   <p className='mb-0 text-center'><Link to={`/shopDetails/${shopList.id}`}>{shopList.shop_name}</Link></p>
                   <i className="fa-solid fa-xmark icons" onClick={() => deleteShop(shopList.id)}></i>

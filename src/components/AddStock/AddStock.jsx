@@ -26,7 +26,12 @@ function AddStock() {
             Authorization: `token ${token}`
           }
         })
-      alert('Stock added successfully')
+      alert('Stock added successfully');
+      setFormData({
+        pro_company: '',
+        productname: '',
+        quantity: ''
+      })
 
     } catch (error) {
       alert('Error adding shop', error)

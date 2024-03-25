@@ -22,7 +22,7 @@ useEffect(() => {
     const token = localStorage.getItem('token');
     const fetchUpdateStock = async () =>{
         try{
-            const response = await axios.get(``,
+            const response = await axios.get(`http://127.0.0.1:8000/shop_app/stocks/${id}/`,
             {
              headers:{
                 Authorization:`Token ${token}`
@@ -30,6 +30,7 @@ useEffect(() => {
             }
             );
             setResult(response.data);
+            console.log(response)
             if(response.data){
                 setFormData({
                     pro_company:response.data.pro_company || '',
@@ -57,7 +58,7 @@ const handleSubmit = async (e) => {
     e.preventDefault()
     const token = localStorage.getItem('token')
     try{
-        const response = await axios.put(`${id}`,
+        const response = await axios.put(`http://127.0.0.1:8000/shop_app/stocks/${id}/`,
         formData, {
             headers: {
                 Authorization:`Token ${token}`

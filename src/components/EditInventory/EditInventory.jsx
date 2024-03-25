@@ -14,24 +14,24 @@ function EditInventory() {
   //get
   const [result, setResult] = useState(null)
   const { id } = useParams()
+  console.log(id)
 
-  const [formData, setFormData] = useState({
+  const [data, setData] = useState({
     shop_name: '',
-    image: '',
     pro_company: '',
     product_name: '',
     description: '',
     price: '',
     selling_price: '',
-    stock_quantity: ''
   });
+  const [image, setImage] = useState()
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     const fetchInventoryData = async () => {
       try {
         const response = await axios.get(
-          ``,
+          `http://127.0.0.1:8000/shop_app/products/${id}/`,
           {
             headers: {
               Authorization: `Token ${token}`
@@ -39,16 +39,16 @@ function EditInventory() {
           }
         );
         setResult(response.data);
+        console.log(response.data)
         if (response.data) {
-          setFormData({
-            shop_name:response.data.shop_name ||'',
-            image:response.data.image || '',
-            pro_company:response.data.pro_company || '',
-            product_name:response.data.product_name || '',
-            description:response.data.description || '',
-            price:response.data.price || '',
-            selling_price:response.data.selling_price || '',
-            stock_quantity:response.data.stock_quantity || ''
+          setData({
+            shop_name: response.data.data.shop_name || '',
+            // image:response.data.data.image || '',
+            pro_company: response.data.data.pro_company || '',
+            product_name: response.data.data.product_name || '',
+            description: response.data.data.description || '',
+            price: response.data.data.price || '',
+            selling_price: response.data.data.selling_price || ''
           });
         }
 
@@ -65,21 +65,34 @@ function EditInventory() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setFormData({ ...formData, [name]: value });
+    setData({ ...data, [name]: value });
   };
-  console.log(formData)
+  console.log(data)
+
+
+  const formData = new FormData()
+  formData.append("shop_name", data.shop_name)
+  formData.append("pro_company", data.pro_company)
+  formData.append("product_name", data.product_name)
+  formData.append("description", data.description)
+  formData.append("price", data.price)
+  formData.append("selling_price", data.selling_price)
+  formData.append("image", image)
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     const token = localStorage.getItem('token')
     try {
-      const response = await axios.put(`${id}`,
+      const response = await axios.put(`http://127.0.0.1:8000/shop_app/products/${id}/`,
         formData, {
         headers: {
-          Authorization: `Token ${token}`
+          Authorization: `token ${token}`,
+          'Content-Type': 'multipart/form-data'
         }
       })
-      alert('edited')
+      alert('succesfully edited')
     } catch (error) {
       console.log(error);
     }
@@ -100,7 +113,7 @@ function EditInventory() {
                       className="mb-4"
                       label="Shop Name"
                       name="shop_name"
-                      value={formData.shop_name}
+                      value={data.shop_name}
                       onChange={handleChange}
 
                     />
@@ -110,7 +123,7 @@ function EditInventory() {
                   className="mb-4"
                   label="Product Company"
                   name="pro_company"
-                  value={formData.pro_company}
+                  value={data.pro_company}
                   onChange={handleChange}
 
                 />
@@ -118,7 +131,7 @@ function EditInventory() {
                   className="mb-4"
                   label="Product Name"
                   name="product_name"
-                  value={formData.product_name}
+                  value={data.product_name}
                   onChange={handleChange}
 
                 />
@@ -126,7 +139,7 @@ function EditInventory() {
                   className="mb-4"
                   label="Description "
                   name="description"
-                  value={formData.description}
+                  value={data.description}
                   onChange={handleChange}
 
                 />
@@ -134,7 +147,7 @@ function EditInventory() {
                   className="mb-4"
                   label="Price"
                   name="price"
-                  value={formData.price}
+                  value={data.price}
                   onChange={handleChange}
 
                 />
@@ -142,26 +155,26 @@ function EditInventory() {
                   className="mb-4"
                   label="Selling Price "
                   name="selling_price"
-                  value={formData.selling_price}
+                  value={data.selling_price}
                   onChange={handleChange}
 
                 />
-                <MDBInput
+                {/* <MDBInput
                   className="mb-4"
                   label="Stock Quantity "
                   name="stock_quantity"
-                  value={formData.stock_quantity}
+                  value={data.stock_quantity}
                   type='number'
                   onChange={handleChange}
 
-                />
+                /> */}
                 <label htmlFor="">Choose product image</label>
                 <MDBInput
                   className="mb-4"
                   type='file'
                   name="image"
-                  value={formData.image}
-                  onChange={handleChange}
+                  // value={data.image}
+                  onChange={(e) => setImage(e.target.files[0])}
                 />
                 <div className="text-center">
                   <button

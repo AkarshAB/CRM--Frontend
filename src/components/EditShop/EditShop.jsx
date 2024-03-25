@@ -86,7 +86,7 @@ function EditShop() {
       alert('form submitted')
 
     } catch (error) {
-      console.log(error)
+      alert(error)
     }
 
   }

@@ -45,12 +45,12 @@ function App() {
         <Route path='/add-products' element={<AddProducts />}></Route>
         <Route path='/editShop/:id' element={<EditShop />}></Route>
         <Route path='/EditEmployees' element={<EditEmployees />}></Route>
-        <Route path='/EditInventory' element={<EditInventory />}></Route>
-        <Route path='/ViewProduct' element={<ViewProduct />}></Route>
+        <Route path='/EditInventory/:id' element={<EditInventory />}></Route>
+        <Route path='/ViewProduct/:id' element={<ViewProduct />}></Route>
         <Route path='/add-stock' element={<AddStock />}></Route>
-        <Route path='/updateStock' element={<UpdateStock />}></Route>
+        <Route path='/updateStock/:id' element={<UpdateStock />}></Route>
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
       <div className=''></div>
     </div>
   );
