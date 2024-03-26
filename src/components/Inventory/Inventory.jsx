@@ -15,11 +15,14 @@ import { FaEdit } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import EditInventory from '../EditInventory/EditInventory';
 import { localStorageAvailable } from '@mui/x-data-grid/utils/utils';
+import Select from 'react-select';
+// import { colourOptions } from '../data';
 
 
 function Inventory() {
 
   const [productsData, setProductsData] = useState([])
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
 
   const fetchInventory = async () => {
@@ -75,6 +78,8 @@ function Inventory() {
 
 
 
+
+
   return (
     <>
       <div className='mx-5 mb-0'>
@@ -82,6 +87,10 @@ function Inventory() {
         <Link to={'/add-products'}><button className='btn btn-primary'>Add Products</button>
         </Link>
       </div>
+      <div className='container-fluid col-6 '>
+
+      </div>
+
 
       <div className="productCards m-5">
         <div className="row flex-wrap">
@@ -90,23 +99,25 @@ function Inventory() {
               <div key={index} className="col-4">
 
                 <Card sx={{ maxWidth: 345 }} className='mb-5'>
-                  <CardActionArea>
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image={product.image}
-                      alt="green iguana"
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="div">
-                        {product.pro_company} - {product.product_name}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000
-                        species, ranging across all continents except Antarctica
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
+                  <Link to={`/ViewProduct/${product.id}`}>
+                    <CardActionArea>
+                      <CardMedia className='img'
+                        component="img"
+                        height="140"
+                        image={`http://127.0.0.1:8000${product.image}`}
+                        alt="green iguana"
+                      />
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                          {product.pro_company} - {product.product_name}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          Lizards are a widespread group of squamate reptiles, with over 6,000
+                          species, ranging across all continents except Antarctica
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Link>
                   <CardActions className='d-flex justify-content-center '>
                     <div onClick={(e) => e.stopPropagation()} className='d-flex gap-5 mb-3'>
                       <Link to={`/EditInventory/${product.id}`}>
