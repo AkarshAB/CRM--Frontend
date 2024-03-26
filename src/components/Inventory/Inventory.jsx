@@ -94,7 +94,7 @@ function Inventory() {
                     <CardMedia
                       component="img"
                       height="140"
-                      image="/static/images/cards/contemplative-reptile.jpg"
+                      image={product.image}
                       alt="green iguana"
                     />
                     <CardContent>
