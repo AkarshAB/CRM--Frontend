@@ -82,6 +82,7 @@ function Inventory() {
         <Link to={'/add-products'}><button className='btn btn-primary'>Add Products</button>
         </Link>
       </div>
+      <input className='d-flex form-control' type="text" placeholder='search' />
 
       <div className="productCards m-5">
         <div className="row flex-wrap">
@@ -94,7 +95,7 @@ function Inventory() {
                     <CardMedia
                       component="img"
                       height="140"
-                      image={product.image}
+                      image="/static/images/cards/contemplative-reptile.jpg"
                       alt="green iguana"
                     />
                     <CardContent>
