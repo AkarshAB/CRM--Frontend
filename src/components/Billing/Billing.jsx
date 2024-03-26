@@ -11,6 +11,7 @@ import axios from 'axios';
 import Cash from './Cash.jsx';
 import UPI from './UPI.jsx';
 import Card from './Card.jsx';
+import Select from 'react-select';
 
 const DISCOUNT = 0.07;
 
@@ -43,7 +44,13 @@ const rows = [
 const invoiceSubtotal = subtotal(rows);
 const invoiceTaxes = DISCOUNT * invoiceSubtotal;
 const invoiceTotal = invoiceSubtotal - invoiceTaxes;
+
+
+
 function Billing() {
+  const [productsData, setProductsData] = useState([])
+  const [selectedProducts, setSelectedProducts] = useState([]);
+
   const [billingData, setBillingData] = useState([])
 
 
@@ -51,7 +58,7 @@ function Billing() {
     const fetchBillingData = async () => {
       const token = localStorage.getItem('token')
       try {
-        const response = await axios.get('',
+        const response = await axios.get('http://127.0.0.1:8000/shop_app/products/',
           {
             headers: {
               Authorization: `Token ${token}`
@@ -59,6 +66,7 @@ function Billing() {
           })
         console.log(response);
         setBillingData(response.data)
+        setProductsData(response.data)
       }
 
       catch (error) {
@@ -125,9 +133,19 @@ function Billing() {
     setIsCard(true)
     setIsUpi(false)
     setIsCash(false)
-
-
   }
+
+  useEffect(() => {
+    const transformedProducts = productsData.map(product => (
+      {
+        value: product.id,
+        label: `${product.pro_company} - ${product.product_name}`
+      }
+    ))
+    setSelectedProducts(transformedProducts)
+    console.log(selectedProducts)
+  }, [productsData])
+
 
 
 
@@ -135,10 +153,21 @@ function Billing() {
 
   return (
     <>
-      <div className=' ms-5'>
-        <p>Name : </p>
-        <p>Contact : </p>
-        <input  className=' form-control' style={{ width: '300px' }} type="text" placeholder='search' />
+      <div className=' ms-5 col-4'>
+        <p>Name : <input className='form-control' type="text" name="" id="" /></p>
+        <p>Contact : <input className='form-control' type="text" name="" id="" /></p>
+
+      </div>
+      <div className='col-6 ms-5'>
+        <Select
+          // defaultValue={}
+          isMulti
+          name="colors"
+          options={selectedProducts}
+          className="basic-multi-select"
+          classNamePrefix="select"
+          placeholder='Select Products...'
+        />
       </div>
       <TableContainer className='p-5 mt-3 ' component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="spanning table">
@@ -209,7 +238,7 @@ function Billing() {
       {
         isCard ? <Card /> : ''
       }
-        <div className='p-4 d-flex justify-content-center'>
+      <div className='p-4 d-flex justify-content-center'>
         <button className='btn btn-primary'>save</button>
       </div>
     </>

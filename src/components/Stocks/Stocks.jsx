@@ -8,6 +8,7 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 
 
 
+
 function Stocks() {
 
   const [stocksData, setStocksData] = useState([])
@@ -62,7 +63,7 @@ function Stocks() {
       renderCell: (params) => (
         <div className='d-flex gap-4'>
           <Link to={`/updateStock/${params.row.id}`}><FaEdit /></Link>
-          <FaTrash onClick={() => handleDelete(params.row.id)} />
+          <FaTrash onClick={() => handleDelete(params.row.id)} style={{ cursor: 'pointer', color: '#980002' }} />
 
         </div>
       ),
