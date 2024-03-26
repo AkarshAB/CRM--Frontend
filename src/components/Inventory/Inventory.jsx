@@ -15,14 +15,15 @@ import { FaEdit } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import EditInventory from '../EditInventory/EditInventory';
 import { localStorageAvailable } from '@mui/x-data-grid/utils/utils';
-import Select from 'react-select';
-// import { colourOptions } from '../data';
+
 
 
 function Inventory() {
 
   const [productsData, setProductsData] = useState([])
-  const [selectedProducts, setSelectedProducts] = useState([]);
+  // const [selectedProducts, setSelectedProducts] = useState([]);
+
+  const [searchText,setSearchText] = useState('')
 
 
   const fetchInventory = async () => {
@@ -73,12 +74,16 @@ function Inventory() {
     // });
   }
 
+ const  handleChange = (e) => {
+  setSearchText(e.target.value)
+  console.log(searchText);
+ }
 
-
-
-
-
-
+ const filteredProducts = productsData.filter(product => 
+  product.product_name.toLowerCase().trim().includes(searchText.toLowerCase()) ||
+  product.pro_company.toLowerCase().trim().includes(searchText.toLowerCase())
+  )
+console.log('filtered data', filteredProducts)
 
   return (
     <>
@@ -88,7 +93,7 @@ function Inventory() {
         </Link>
       </div>
       <div className='container-fluid col-6 '>
-
+        <input className='p-2 form-control ' onChange={handleChange} type="text" placeholder='search' />
       </div>
 
 
