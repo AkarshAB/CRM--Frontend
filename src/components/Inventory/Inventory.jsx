@@ -83,7 +83,7 @@ function Inventory() {
   product.product_name.toLowerCase().trim().includes(searchText.toLowerCase()) ||
   product.pro_company.toLowerCase().trim().includes(searchText.toLowerCase())
   )
-console.log('filtered data', filteredProducts)
+console.log('filtered data',filteredProducts)
 
   return (
     <>
