@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import './Billing.css'
+import React, { useEffect, useState } from 'react';
+import './Billing.css';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -29,220 +29,155 @@ function createRow(desc, qty, unit) {
 }
 
 function subtotal(items) {
-
-
-
   return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
 }
 
-const rows = [
-  createRow('Paperclips (Box)', 100, 1.22),
-  createRow('Paper (Case)', 10, 45.99),
-  createRow('Waste Basket', 2, 17.99),
-];
-
-const invoiceSubtotal = subtotal(rows);
-const invoiceTaxes = DISCOUNT * invoiceSubtotal;
-const invoiceTotal = invoiceSubtotal - invoiceTaxes;
-
-
-
 function Billing() {
-  const [productsData, setProductsData] = useState([])
+  const [productsData, setProductsData] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
-
-  const [billingData, setBillingData] = useState([])
-
+  const [tableRows, setTableRows] = useState([]); // State to store table rows
+  const [invoiceSubtotal, setInvoiceSubtotal] = useState(0); // State to store subtotal
+  const [invoiceTaxes, setInvoiceTaxes] = useState(0); // State to store taxes
+  const [invoiceTotal, setInvoiceTotal] = useState(0); // State to store total
 
   useEffect(() => {
     const fetchBillingData = async () => {
-      const token = localStorage.getItem('token')
+      const token = localStorage.getItem('token');
       try {
-        const response = await axios.get('http://127.0.0.1:8000/shop_app/products/',
-          {
-            headers: {
-              Authorization: `Token ${token}`
-            }
-          })
+        const response = await axios.get('http://127.0.0.1:8000/shop_app/products/', {
+          headers: {
+            Authorization: `Token ${token}`
+          }
+        });
         console.log(response);
-        setBillingData(response.data)
-        setProductsData(response.data)
-      }
-
-      catch (error) {
+        setProductsData(response.data);
+        setSelectedProducts(response.data);
+      } catch (error) {
         console.log('Error:', error);
       }
-    }
+    };
     fetchBillingData();
-  }, [])
+  }, []);
 
-  const [isCash, setIsCash] = useState(false)
-  const [isUpi, setIsUpi] = useState(false)
-  const [isCard, setIsCard] = useState(false)
-
-
+  const [isCash, setIsCash] = useState(false);
+  const [isUpi, setIsUpi] = useState(false);
+  const [isCard, setIsCard] = useState(false);
 
   const handleCash = () => {
-    document.getElementById('cash').click()
-    const cash = document.getElementById('cashDiv')
-    const upi = document.getElementById('upiDiv')
-    const card = document.getElementById('cardDiv')
-
-
-    cash.style.backgroundColor = 'lightblue'
-    upi.style.backgroundColor = ''
-    card.style.backgroundColor = ''
-
-
-    setIsCash(true)
-    setIsUpi(false)
-    setIsCard(false)
-  }
-
-
+    document.getElementById('cash').click();
+    setIsCash(true);
+    setIsUpi(false);
+    setIsCard(false);
+  };
 
   const handleUpi = () => {
-    document.getElementById('upi').click()
-
-    const cash = document.getElementById('cashDiv')
-    const upi = document.getElementById('upiDiv')
-    const card = document.getElementById('cardDiv')
-
-
-    cash.style.backgroundColor = ''
-    upi.style.backgroundColor = 'lightblue'
-    card.style.backgroundColor = ''
-    setIsUpi(true)
-    setIsCash(false)
-    setIsCard(false)
-
-  }
-
+    document.getElementById('upi').click();
+    setIsUpi(true);
+    setIsCash(false);
+    setIsCard(false);
+  };
 
   const handleCard = () => {
-    document.getElementById('card').click()
-
-    const cash = document.getElementById('cashDiv')
-    const upi = document.getElementById('upiDiv')
-    const card = document.getElementById('cardDiv')
-
-
-    cash.style.backgroundColor = ''
-    upi.style.backgroundColor = ''
-    card.style.backgroundColor = 'lightblue'
-    setIsCard(true)
-    setIsUpi(false)
-    setIsCash(false)
-  }
+    document.getElementById('card').click();
+    setIsCard(true);
+    setIsUpi(false);
+    setIsCash(false);
+  };
 
   useEffect(() => {
-    const transformedProducts = productsData.map(product => (
-      {
-        value: product.id,
-        label: `${product.pro_company} - ${product.product_name}`
-      }
-    ))
-    setSelectedProducts(transformedProducts)
-    console.log(selectedProducts)
-  }, [productsData])
+    const transformedProducts = productsData.map(product => ({
+      value: product.id,
+      label: `${product.pro_company} - ${product.product_name}`,
+      price: product.price // Include product price in the option
+    }));
+    setSelectedProducts(transformedProducts);
+  }, [productsData]);
 
+  const handleProductSelect = (selectedOptions) => {
+    // Handle selection change
+    console.log('Selected products:', selectedOptions);
+    const selectedRows = selectedOptions.map(option =>
+      createRow(option.label, 1, option.price)
+    );
+    const selectedSubtotal = subtotal(selectedRows);
+    const selectedTaxes = DISCOUNT * selectedSubtotal;
+    const selectedTotal = selectedSubtotal - selectedTaxes;
 
-
-
-
+    // Update table rows and invoice totals
+    setTableRows(selectedRows);
+    setInvoiceSubtotal(selectedSubtotal);
+    setInvoiceTaxes(selectedTaxes);
+    setInvoiceTotal(selectedTotal);
+  };
 
   return (
     <>
-      <div className=' ms-5 col-4'>
-        <p>Name : <input className='form-control' type="text" name="" id="" /></p>
-        <p>Contact : <input className='form-control' type="text" name="" id="" /></p>
-
-      </div>
+      {/* Shop details */}
+      {/* Contact details */}
+      {/* Product selection */}
       <div className='col-6 ms-5'>
         <Select
-          // defaultValue={}
           isMulti
-          name="colors"
+          name='colors'
           options={selectedProducts}
-          className="basic-multi-select"
-          classNamePrefix="select"
+          className='basic-multi-select mt-3'
+          classNamePrefix='select'
           placeholder='Select Products...'
+          onChange={handleProductSelect}
         />
       </div>
+
+      {/* Table for displaying selected products */}
       <TableContainer className='p-5 mt-3 ' component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="spanning table">
+        <Table sx={{ minWidth: 700 }} aria-label='spanning table'>
           <TableHead>
             <TableRow>
-              <TableCell align="center" colSpan={3}>
+              <TableCell align='center' colSpan={3}>
                 Details
               </TableCell>
-              <TableCell align="right">Price</TableCell>
+              <TableCell align='right'>Price</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>Desc</TableCell>
-              <TableCell align="right">Qty.</TableCell>
-              <TableCell align="right">Unit</TableCell>
-              <TableCell align="right">Sum</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell align='right'>Qty.</TableCell>
+              <TableCell align='right'>Unit</TableCell>
+              <TableCell align='right'>Sum</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.desc}>
+            {tableRows.map((row, index) => (
+              <TableRow key={index}>
                 <TableCell>{row.desc}</TableCell>
-                <TableCell align="right">{row.qty}</TableCell>
-                <TableCell align="right">{row.unit}</TableCell>
-                <TableCell align="right">{ccyFormat(row.price)}</TableCell>
+                <TableCell align='right'>{row.qty}</TableCell>
+                <TableCell align='right'>{row.unit}</TableCell>
+                <TableCell align='right'>{ccyFormat(row.price)}</TableCell>
               </TableRow>
             ))}
             <TableRow>
               <TableCell rowSpan={3} />
               <TableCell colSpan={2}>Subtotal</TableCell>
-              <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
+              <TableCell align='right'>{ccyFormat(invoiceSubtotal)}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell>Discount</TableCell>
-              <TableCell align="right">{`${(DISCOUNT * 100).toFixed(0)} %`}</TableCell>
-              <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
+              <TableCell align='right'>{`${(DISCOUNT * 100).toFixed(0)} %`}</TableCell>
+              <TableCell align='right'>{ccyFormat(invoiceTaxes)}</TableCell>
             </TableRow>
             <TableRow>
               <TableCell colSpan={2}>Total</TableCell>
-              <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
+              <TableCell align='right'>{ccyFormat(invoiceTotal)}</TableCell>
             </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
 
-      <div className="payment m-5 text-center">
-        <h3 className='mb-4'>Payment Method</h3>
-        <div className='paymentMethods'>
-          <div className="paymentCash" onClick={handleCash} id='cashDiv'>
-            <input type="radio" name="paymentMethod" id="cash" required />
-            <label htmlFor="cash" className='ms-3'>Cash</label>
-          </div>
-          <div className="paymentUpi" onClick={handleUpi} id='upiDiv'>
-            <input type="radio" name="paymentMethod" id="upi" required />
-            <label htmlFor="upi" className='ms-3'>UPI</label>
-          </div>
-          <div className="paymentCard" onClick={handleCard} id='cardDiv'>
-            <input type="radio" name="paymentMethod" id="card" required />
-            <label htmlFor="card" className='ms-3'>Card</label>
-          </div>
-        </div>
-      </div>
-      {
-        isCash ? <Cash /> : ''
-      }
-      {
-        isUpi ? <UPI /> : ''
-      }
-      {
-        isCard ? <Card /> : ''
-      }
+      {/* Payment method selection */}
+      {/* Payment component based on selected method */}
       <div className='p-4 d-flex justify-content-center'>
         <button className='btn btn-primary'>save</button>
       </div>
     </>
-  )
+  );
 }
 
-export default Billing
+export default Billing;

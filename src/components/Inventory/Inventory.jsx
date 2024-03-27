@@ -21,9 +21,10 @@ import { localStorageAvailable } from '@mui/x-data-grid/utils/utils';
 function Inventory() {
 
   const [productsData, setProductsData] = useState([])
+  const [filteredProducts, setFilteredProducts] = useState([])
   // const [selectedProducts, setSelectedProducts] = useState([]);
 
-  const [searchText,setSearchText] = useState('')
+  const [searchText, setSearchText] = useState('')
 
 
   const fetchInventory = async () => {
@@ -41,6 +42,7 @@ function Inventory() {
         });
       console.log(response);
       setProductsData(response.data)
+      setFilteredProducts(response.data)
     }
     catch (error) {
       console.log(error);
@@ -74,16 +76,26 @@ function Inventory() {
     // });
   }
 
- const  handleChange = (e) => {
-  setSearchText(e.target.value)
-  console.log(searchText);
- }
+  const handleChange = (e) => {
+    setSearchText(e.target.value)
+    console.log(searchText);
+  }
 
- const filteredProducts = productsData.filter(product => 
-  product.product_name.toLowerCase().trim().includes(searchText.toLowerCase()) ||
-  product.pro_company.toLowerCase().trim().includes(searchText.toLowerCase())
-  )
-console.log('filtered data',filteredProducts)
+
+
+
+  const handleSearch = () => {
+    const filteredProducts = productsData.filter(product =>
+      product.product_name.toLowerCase().trim().includes(searchText.toLowerCase().trim()) ||
+      product.pro_company.toLowerCase().trim().includes(searchText.toLowerCase().trim())
+    )
+    console.log('filtered data', filteredProducts)
+
+    setFilteredProducts(filteredProducts)
+  }
+
+
+
 
   return (
     <>
@@ -92,15 +104,16 @@ console.log('filtered data',filteredProducts)
         <Link to={'/add-products'}><button className='btn btn-primary'>Add Products</button>
         </Link>
       </div>
-      <div className='container-fluid col-6 '>
-        <input className='p-2 form-control ' onChange={handleChange} type="text" placeholder='search' />
+      <div className='container-fluid col-6 d-flex gap-3'>
+        <input className='p-2 form-control ' onKeyDown={handleSearch} onChange={handleChange} type="text" placeholder='Search product' />
+        {/* <button className='btn btn-primary' onClick={handleSearch}>Search</button> */}
       </div>
 
 
       <div className="productCards m-5">
         <div className="row flex-wrap">
           {
-            productsData.map((product, index) => (
+            filteredProducts.map((product, index) => (
               <div key={index} className="col-4">
 
                 <Card sx={{ maxWidth: 345 }} className='mb-5'>
